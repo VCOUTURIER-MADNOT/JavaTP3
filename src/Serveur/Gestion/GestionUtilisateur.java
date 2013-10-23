@@ -25,6 +25,7 @@ public class GestionUtilisateur extends UnicastRemoteObject implements IGestionU
 	public GestionUtilisateur() throws RemoteException
 	{
 		super();
+		
 		SAXBuilder sxb = new SAXBuilder();
 		try
 		{
@@ -51,6 +52,10 @@ public class GestionUtilisateur extends UnicastRemoteObject implements IGestionU
 	
 	public void addPersonneList(String _nom, String _prenom, String _login, String _mdp) throws RemoteException
 	{
+		racine = document.getRootElement();
+		personnes.clear();
+		getPersonnes();
+		
 		Personne p = new Personne(_nom, _prenom, _login, _mdp);
 		personnes.add(p);
 		System.out.println("Ajout!");
