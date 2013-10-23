@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listePersonne>
+  <Personne>
+    <Nom>user01</Nom>
+    <Prenom>user01</Prenom>
+    <Login>user01Login</Login>
+    <Mdp>user01Mdp</Mdp>
+  </Personne>
+  <Personne>
+    <Nom>José</Nom>
+    <Prenom>Maoé</Prenom>
+    <Login>jo</Login>
+    <Mdp>jopwd</Mdp>
+  </Personne>
+</listePersonne>
