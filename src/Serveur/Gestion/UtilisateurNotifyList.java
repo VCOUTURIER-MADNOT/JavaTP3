@@ -42,13 +42,12 @@ public class UtilisateurNotifyList extends NotifyList<Personne> {
 		this.racine.addContent(ePersonne);
 	}
 
-	private Element getElementFromId(String _id)
+	protected Element getElementFromId(String _id)
 	{
-		Element racine = this.document.getRootElement();
-		List<Element> logins = racine.getChildren("Login");
+		List<Element> logins = this.racine.getChildren("Login");
 		Iterator<Element> iterator = logins.iterator();
 		Element login = null;
-		while(iterator.hasNext() && !( (login = iterator.next()).equals(_id)));
+		while(iterator.hasNext() && !( (login = iterator.next()).getText().equals(_id)));
 		if(login != null)	
 			return login.getParentElement();
 		

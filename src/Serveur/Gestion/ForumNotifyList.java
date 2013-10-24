@@ -33,11 +33,10 @@ public class ForumNotifyList extends NotifyList<Forum>{
 	
 	public Element getElementFromId(String _id)
 	{
-		Element racine = this.document.getRootElement();
-		List<Element> sujets = racine.getChildren("Sujet");
+		List<Element> sujets = this.racine.getChildren("Sujet");
 		Iterator<Element> iterator = sujets.iterator();
 		Element sujet = null;
-		while(iterator.hasNext() && !( (sujet = iterator.next()).equals(_id)));
+		while(iterator.hasNext() && !( (sujet = iterator.next()).getText().equals(_id)));
 		if(sujet != null)	
 			return sujet.getParentElement();
 		
