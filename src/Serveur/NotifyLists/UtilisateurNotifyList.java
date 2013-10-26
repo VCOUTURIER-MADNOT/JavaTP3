@@ -43,7 +43,6 @@ public class UtilisateurNotifyList extends NotifyList<Personne> {
 
 	@Override
 	public void addToXML(Personne _p) {
-		System.out.println("addToXml");
 		Element ePersonne = this.getElementFromObject(_p);
 		if (ePersonne != null)
 		{
@@ -55,12 +54,17 @@ public class UtilisateurNotifyList extends NotifyList<Personne> {
 	@Override
 	protected Element getElementFromId(String _id)
 	{
-		List<Element> logins = this.racine.getChildren("Login");
-		Iterator<Element> iterator = logins.iterator();
-		Element login = null;
-		while(iterator.hasNext() && !( (login = iterator.next()).getText().equals(_id)));
-		if(login != null)	
-			return login.getParentElement();
+		List<Element> personnes = this.racine.getChildren("Personne");
+		Iterator<Element> iterator = personnes.iterator();
+		Element personne = null;
+		while(iterator.hasNext())
+		{
+			personne = iterator.next();
+			if (personne.getChild("Login").getText().equals(_id))
+			{	
+				return personne;
+			}
+		}
 		
 		return null;
 	}
@@ -68,10 +72,8 @@ public class UtilisateurNotifyList extends NotifyList<Personne> {
 	@Override
 	protected Element getElementFromObject(Object _o) {
 		Element ePersonne = null;
-		System.out.println("getElementFromObject");
 		if (_o instanceof Personne)
 		{
-			System.out.println("Personne reçu");
 			Personne p = (Personne) _o;
 			
 			Element eNom = new Element("Nom");

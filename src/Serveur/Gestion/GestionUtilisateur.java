@@ -49,8 +49,10 @@ public class GestionUtilisateur extends UnicastRemoteObject implements IGestionU
 		{
 			if (personnes.get(i).getLogin().equals(_login))
 			{
+				System.out.println(i);
 				p = personnes.get(i);
 			}
+			i++;
 		}
 		
 		return p;
