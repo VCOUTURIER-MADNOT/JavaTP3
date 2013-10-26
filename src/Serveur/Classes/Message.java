@@ -46,6 +46,16 @@ public class Message {
 		this.date = _date;
 	}
 	
-	
+	@Override
+	public boolean equals(Object _o)
+	{
+		if (_o instanceof Message)
+		{
+			Message m = (Message) _o;
+			return m.getId() == this.getId();
+		}
+		
+		return false;
+	}
 
 }
