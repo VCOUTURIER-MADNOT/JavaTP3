@@ -4,9 +4,10 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import Serveur.Gestion.MessageNotifyList;
+import Serveur.Interfaces.IForum;
+import Serveur.NotifyLists.MessageNotifyList;
 
-public class Forum extends UnicastRemoteObject{
+public class Forum extends UnicastRemoteObject implements IForum{
 	
 	private String sujet;
 	private MessageNotifyList messages;
@@ -32,10 +33,12 @@ public class Forum extends UnicastRemoteObject{
 		return this.messages;
 	}
 	
+	@Override
 	public void addMessage(String _contenu, Personne _auteur)
 	{
 		Message message = new Message( ++nbMessages, _contenu, _auteur);
 		this.messages.add(message);
 	}
+
 	
 }

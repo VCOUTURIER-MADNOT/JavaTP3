@@ -3,9 +3,12 @@ package Serveur.Interfaces;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import Serveur.Classes.Personne;
+import Serveur.NotifyLists.MessageNotifyList;
+
 public interface IForum extends Remote {
 
-	public void ecrireMessage(String _message) throws RemoteException;
+	public void addMessage(String _message, Personne _auteur) throws RemoteException;
 	
-	public String getMessages() throws RemoteException;
+	public MessageNotifyList getMessages() throws RemoteException;
 }

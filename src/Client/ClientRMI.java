@@ -21,7 +21,7 @@ public class ClientRMI {
     	IGestionUtilisateur GU = null;
     	try {
 			GU = (IGestionUtilisateur) Naming.lookup("rmi://localhost/Serveur/Gestion");
-			GU.addPersonneList("lel", "lel", "lel", "lel");
+			GU.addPersonneList("leal", "lel", "leael", "lel");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

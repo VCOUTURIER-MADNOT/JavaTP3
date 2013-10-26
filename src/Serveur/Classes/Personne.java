@@ -52,5 +52,13 @@ public class Personne{
 				+ login + ", mdp=" + mdp + "]";
 	}
 	
-	
+	@Override
+	public boolean equals(Object _o) {
+		if(_o instanceof Personne)
+		{
+			Personne p = (Personne) _o;
+			return this.getLogin().equals(p.getLogin());
+		}
+		return false;
+	}
 }
