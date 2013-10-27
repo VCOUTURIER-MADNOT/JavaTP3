@@ -11,7 +11,15 @@ public class Message {
 	private Personne auteur;
 	private Date date;
 	
-	public Message(int _id, String _contenu, String _login, Date date)
+	public Message(int _id, String _contenu, String _login, Date _date)
+	{
+		this.id 		= _id;
+		this.contenu	= _contenu;
+		this.auteur 	= GestionUtilisateur.getPersonne(_login);
+		this.date 		= _date;
+	}
+	
+	public Message(int _id, String _contenu, String _login)
 	{
 		this.id 		= _id;
 		this.contenu	= _contenu;

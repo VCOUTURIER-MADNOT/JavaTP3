@@ -43,9 +43,9 @@ public class Forum extends UnicastRemoteObject implements IForum{
 	}
 	
 	@Override
-	public void addMessage(String _contenu, Personne _auteur)
+	public void addMessage(String _contenu, String _login)
 	{
-		Message message = new Message( ++nbMessages, _contenu, _auteur);
+		Message message = new Message( ++nbMessages, _contenu, _login);
 		this.messages.add(message);
 	}
 	

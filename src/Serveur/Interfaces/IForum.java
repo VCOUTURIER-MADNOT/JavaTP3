@@ -8,7 +8,7 @@ import Serveur.NotifyLists.MessageNotifyList;
 
 public interface IForum extends Remote {
 
-	public void addMessage(String _message, Personne _auteur) throws RemoteException;
+	public void addMessage(String _message, String _auteur) throws RemoteException;
 	
 	public MessageNotifyList getMessages() throws RemoteException;
 }
