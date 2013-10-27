@@ -47,7 +47,7 @@ public class UtilisateurNotifyList extends NotifyList<Personne> {
 		if (ePersonne != null)
 		{
 			this.racine.addContent(ePersonne);
-			System.out.println("Personne " + _p.getLogin() + " insérée dans la liste.");
+			System.out.println("Personne " + _p.getLogin() + " insérée dans le fichier XML.");
 		}
 	}
 

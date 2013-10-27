@@ -2,6 +2,8 @@ package Serveur.Classes;
 
 import java.util.Date;
 
+import Serveur.Gestion.GestionUtilisateur;
+
 public class Message {
 
 	private int id;
@@ -9,11 +11,11 @@ public class Message {
 	private Personne auteur;
 	private Date date;
 	
-	public Message(int _id, String _contenu, Personne _auteur)
+	public Message(int _id, String _contenu, String _login, Date date)
 	{
 		this.id 		= _id;
 		this.contenu	= _contenu;
-		this.auteur 	= _auteur;
+		this.auteur 	= GestionUtilisateur.getPersonne(_login);
 		this.date 		= new Date(System.currentTimeMillis());
 	}
 	

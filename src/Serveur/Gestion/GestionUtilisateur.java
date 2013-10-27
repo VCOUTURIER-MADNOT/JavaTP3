@@ -41,7 +41,7 @@ public class GestionUtilisateur extends UnicastRemoteObject implements IGestionU
 		}
 	}
 	
-	public Personne getPersonne(String _login)
+	public static Personne getPersonne(String _login)
 	{
 		int i = 0;
 		Personne p = null;

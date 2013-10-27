@@ -1,8 +1,16 @@
 package Serveur.Classes;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
+
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 
 import Serveur.Interfaces.IForum;
 import Serveur.NotifyLists.MessageNotifyList;
@@ -17,6 +25,7 @@ public class Forum extends UnicastRemoteObject implements IForum{
 	{
 		this.sujet = _sujet;
 		this.nbMessages = 0;
+		this.messages = new MessageNotifyList(this.getURL());
 	}
 	
 	public String getSujet(){
@@ -51,6 +60,4 @@ public class Forum extends UnicastRemoteObject implements IForum{
 		
 		return false;
 	}
-
-	
 }
