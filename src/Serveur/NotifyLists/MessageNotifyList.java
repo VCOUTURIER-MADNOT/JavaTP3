@@ -15,12 +15,17 @@ import Serveur.Classes.Message;
 public class MessageNotifyList extends NotifyList<Message>{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5142942402600364906L;
+
 	public MessageNotifyList(String _url)
 	{
 		SAXBuilder sxb = new SAXBuilder();
 		this.xmlUrl = _url;
 		try {
-			this.document = sxb.build(new File(this.xmlUrl));
+			this.document = sxb.build(new File(this.xmlUrl+".xml"));
 		} catch (JDOMException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

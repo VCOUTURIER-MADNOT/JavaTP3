@@ -3,7 +3,6 @@ package Serveur.Interfaces;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import Serveur.Classes.Personne;
 import Serveur.NotifyLists.MessageNotifyList;
 
 public interface IForum extends Remote {

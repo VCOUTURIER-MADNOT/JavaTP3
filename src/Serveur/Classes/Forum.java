@@ -1,9 +1,7 @@
 package Serveur.Classes;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -17,6 +15,11 @@ import Serveur.NotifyLists.MessageNotifyList;
 
 public class Forum extends UnicastRemoteObject implements IForum{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5202636066424668920L;
+	
 	private String sujet;
 	private MessageNotifyList messages;
 	private int nbMessages;
@@ -25,6 +28,7 @@ public class Forum extends UnicastRemoteObject implements IForum{
 	{
 		this.sujet = _sujet;
 		this.nbMessages = 0;
+		this.createXml();
 		this.messages = new MessageNotifyList(this.getURL());
 	}
 	
@@ -59,5 +63,31 @@ public class Forum extends UnicastRemoteObject implements IForum{
 		}
 		
 		return false;
+	}
+	
+	public boolean createXml()
+	{
+
+		File f = new File(this.getURL() + ".xml");
+		
+		if(!f.exists())
+		{	
+			try
+			{
+				Element root = new Element("Forum");
+				Document doc = new Document(root);
+				
+				XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+				sortie.output(doc, new FileOutputStream(this.getURL() + ".xml"));
+			}
+			catch (java.io.IOException e)
+			{
+				System.out.println("Erreur :" + e);
+			}
+		    
+		    return true;
+		}
+		
+		return false;		
 	}
 }

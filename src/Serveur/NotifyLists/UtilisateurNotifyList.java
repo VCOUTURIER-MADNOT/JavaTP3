@@ -11,6 +11,11 @@ import Serveur.Classes.Personne;
 
 public class UtilisateurNotifyList extends NotifyList<Personne> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7554953552336724604L;
+
 	public UtilisateurNotifyList()
 	{
 		SAXBuilder sxb = new SAXBuilder();

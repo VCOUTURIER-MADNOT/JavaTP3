@@ -1,9 +1,10 @@
 package Client;
-import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
+import Serveur.Interfaces.IGestionForum;
 import Serveur.Interfaces.IGestionUtilisateur;
  
 /**
@@ -19,12 +20,14 @@ public class ClientRMI {
      */
     public static void main(String[] args){
     	IGestionUtilisateur GU = null;
+    	IGestionForum GF = null;
     	try {
-			GU = (IGestionUtilisateur) Naming.lookup("rmi://localhost/Serveur/Gestion");
+    		Registry registry = LocateRegistry.getRegistry(12345);
+			GU = (IGestionUtilisateur) registry.lookup("Serveur/GestionUtilisateur");
 			GU.addPersonneList("leal", "lel", "leael", "lel");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			GF = (IGestionForum) registry.lookup("Serveur/GestionForum");
+			GF.creerForum("bonjour");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

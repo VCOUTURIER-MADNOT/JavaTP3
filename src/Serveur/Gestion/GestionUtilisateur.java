@@ -9,7 +9,12 @@ import Serveur.NotifyLists.UtilisateurNotifyList;
 
 public class GestionUtilisateur extends UnicastRemoteObject implements IGestionUtilisateur{
 
-	static UtilisateurNotifyList personnes;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 852404754652614214L;
+	
+	private static UtilisateurNotifyList personnes;
 	
 	public GestionUtilisateur() throws RemoteException
 	{

@@ -1,6 +1,5 @@
 package Serveur.NotifyLists;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,6 +13,11 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 public abstract class NotifyList<E> extends ArrayList<E> {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4971009744533302974L;
 	
 	protected 			Document 	document;
 	protected 			Element 	racine;

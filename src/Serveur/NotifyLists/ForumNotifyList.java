@@ -12,6 +12,11 @@ import Serveur.Classes.Forum;
 
 public class ForumNotifyList extends NotifyList<Forum>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6151743467674198333L;
+
 	public ForumNotifyList()
 	{
 		SAXBuilder sxb = new SAXBuilder();
@@ -40,8 +45,6 @@ public class ForumNotifyList extends NotifyList<Forum>{
 			this.racine.addContent(eForum);
 			System.out.println("Forum " + _f.getSujet() + " inséré dans la liste.");
 		}
-		
-		this.racine.addContent(eForum);
 	}
 
 	@Override
@@ -91,11 +94,12 @@ public class ForumNotifyList extends NotifyList<Forum>{
 
 	@Override
 	protected Object getObjectFromElement(Element _e) {
+		Forum f = null;
 		try {
-			Forum f = new Forum(_e.getChildText("Sujet"));
+			f = new Forum(_e.getChildText("Sujet"));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return f;
 	}
 }

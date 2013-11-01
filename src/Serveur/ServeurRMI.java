@@ -1,9 +1,11 @@
 package Serveur;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
+import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
+import Serveur.Gestion.GestionForum;
 import Serveur.Gestion.GestionUtilisateur;
 
  
@@ -14,20 +16,24 @@ import Serveur.Gestion.GestionUtilisateur;
  */
 public class ServeurRMI {
  
+	public static Registry registry;
     /**
      * Methode principale.
      * @param args inutilise
      */
     public static void main(String[] args) {
 		try {
+			registry = LocateRegistry.createRegistry(12345);
 			GestionUtilisateur GU = new GestionUtilisateur();
-			Naming.rebind("Serveur/Gestion", GU);
+			GestionForum GF = new GestionForum();
+			registry.bind("Serveur/GestionUtilisateur", GU);
+			registry.bind("Serveur/GestionForum", GF);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (MalformedURLException e) {
+		} catch (AlreadyBoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 		System.out.println("Serveur démarré !");
     }

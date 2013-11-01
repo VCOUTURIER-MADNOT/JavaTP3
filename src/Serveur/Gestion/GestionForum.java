@@ -1,67 +1,85 @@
 package Serveur.Gestion;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.AlreadyBoundException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
-
+import Serveur.ServeurRMI;
 import Serveur.Classes.Forum;
 import Serveur.Interfaces.IGestionForum;
+import Serveur.NotifyLists.ForumNotifyList;
 
 public class GestionForum extends UnicastRemoteObject implements IGestionForum {
 
-	protected GestionForum() throws RemoteException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6416503218399391747L;
+	
+	private static ForumNotifyList forums;
+	
+	public GestionForum() throws RemoteException {
 		super();
-		
-		
+		GestionForum.forums = new ForumNotifyList();
+		for (Forum f : GestionForum.forums)
+		{
+			if (f != null)
+			{
+				try {
+					ServeurRMI.registry.bind(f.getURL(), f);
+				} catch (AlreadyBoundException e) {
+					System.out.println("Naming déjà existant :" + e);
+				}
+			}
+		}
 	}
 
 	@Override
 	public void creerForum(String _nom) throws RemoteException {
-		// TODO Auto-generated method stub
-
+		Forum f = new Forum(_nom);
+		GestionForum.forums.add(f);
+		try {
+			ServeurRMI.registry.bind(f.getURL(), f);
+		} catch (AlreadyBoundException e) {
+			System.out.println("Naming déjà existant :" + e);
+		}
 	}
 
 	@Override
 	public void supprimerForum(String _nom) throws RemoteException {
-		// TODO Auto-generated method stub
+		Forum f = getForum(_nom);
+		if (f != null)
+		{
+			GestionForum.forums.remove(f);
+			File file = new File(f.getURL() + ".xml");
+			if(file != null)
+			{
+				file.delete();
+			}
+			
+		}
+		else
+		{
+			System.out.println("Le forum \"" + _nom + "\" n'existe pas.");
+		}
 
 	}
-	
 
-
-	public boolean createXml(Forum _forum)
+	private static Forum getForum(String _sujet)
 	{
-
-		File f = new File(_forum.getURL());
-		
-		if(!f.exists())
-		{	
-			Document doc = new Document();
-			Element root = new Element("Forum");
-		
-			doc.setRootElement(root);
-			
-			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-		    
-		    try {
-				sortie.output(doc, new FileOutputStream(_forum.getURL()));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+		int i = 0;
+		Forum f = null;
+		while(i < GestionForum.forums.size() && f == null)
+		{
+			if (GestionForum.forums.get(i).getSujet().equals(_sujet))
+			{
+				f = GestionForum.forums.get(i);
 			}
-		    
-		    return true;
+			++i;
 		}
-		
-		return false;		
+		return f;
 	}
 }
